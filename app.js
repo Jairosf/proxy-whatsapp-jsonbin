@@ -4,13 +4,11 @@ const app = express();
 app.use(express.json());
 
 app.post("/", async (req, res) => {
-  const payload = req.body;
-
-  const numero = payload?.from?.split("@")[0];
-  const mensagem = payload?.body;
+  const numero = req.body?.data?.from?.split("@")[0];
+  const mensagem = req.body?.data?.body;
 
   if (!numero || !mensagem) {
-    console.log("⚠️ Payload incompleto:", payload);
+    console.log("⚠️ Payload incompleto:", req.body);
     return res.status(400).send("Ignorado");
   }
 
